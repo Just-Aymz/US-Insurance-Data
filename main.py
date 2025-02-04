@@ -22,7 +22,7 @@ def home():
 def predict(data: InputFeatures):
     try:
         # Convert Pydantic model to dictionary
-        input_dict = dict(data)
+        input_dict = data.model_dump()
 
         # Convert to DataFrame
         input_df = pd.DataFrame([input_dict])
