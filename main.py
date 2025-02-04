@@ -24,16 +24,18 @@ def predict(data: InputFeatures):
         # Convert Pydantic model to dictionary
         input_dict = data.model_dump()
 
+        return {"received_data": input_data.model_dump()}
+
         # Convert to DataFrame
-        input_df = pd.DataFrame([input_dict])
+        # input_df = pd.DataFrame([input_dict])
 
         # Apply transformations
-        X_transformed = preprocessor.transform(input_df)
+        # X_transformed = preprocessor.transform(input_df)
 
         # Make a prediction
-        prediction = model.predict(X_transformed)
+        # prediction = model.predict(X_transformed)
 
-        return {"prediction": prediction.tolist()}
+        # return {"prediction": prediction.tolist()}
     
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
