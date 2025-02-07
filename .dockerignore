@@ -1,0 +1,25 @@
+# Ignore Jupyter notebooks
+*.ipynb
+
+# Ignore virtual environments
+venv/
+.env
+
+# Ignore cache and system files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore logs and temporary files
+logs/
+*.log
+
+# Ignore model training scripts if not needed
+Data_Preprocessing.ipynb
+
+# Ignore the .csv feals
+*.csv
+
+# Ignore markdown files
+*.md
