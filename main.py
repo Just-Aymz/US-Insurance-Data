@@ -5,11 +5,8 @@ import pandas as pd
 from Schema import InputFeatures
 
 # Load the saved model and preprocessor
-with open("best_model.pkl", "rb") as f:
+with open("best_model_and_preprocessor.pkl", "rb") as f:
     model = pickle.load(f)
-
-with open("preprocessor.pkl", "rb") as f:
-    preprocessor = pickle.load(f)
 
 # Initialize FastAPI app
 app = FastAPI()
@@ -19,23 +16,17 @@ def home():
     return {"message": "Welcome to the Machine Learning API"}
 
 @app.post("/predict")
-def predict(data: InputFeatures):
+def predict(input_data: InputFeatures):
     try:
-        # Convert Pydantic model to dictionary
-        input_dict = data.model_dump()
+        # Convert input_data into a dataframe (expected by the model)
+        input_df = pd.DataFrame([input_data.dict()])
 
-        return {"received_data": input_data.model_dump()}
-
-        # Convert to DataFrame
-        # input_df = pd.DataFrame([input_dict])
-
-        # Apply transformations
-        # X_transformed = preprocessor.transform(input_df)
+        print(f"received_data: {input_data.model_dump()}")
 
         # Make a prediction
-        # prediction = model.predict(X_transformed)
+        prediction = model.predict(input_df)
 
-        # return {"prediction": prediction.tolist()}
+        return {"prediction": prediction[0]}
     
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
