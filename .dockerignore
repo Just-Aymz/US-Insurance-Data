@@ -4,12 +4,9 @@
 # Ignore virtual environments
 venv/
 .env
-<<<<<<< HEAD
 myenv/
 /myenv/
 /myenv
-=======
->>>>>>> d85bb04f61c87ee9ae7d5372c1caa56a7b4504d7
 
 # Ignore cache and system files
 __pycache__/
@@ -21,13 +18,6 @@ __pycache__/
 logs/
 *.log
 
-<<<<<<< HEAD
-# Ignore data files
-*.csv
-
-# Ignore model training scripts if not needed
-Data_Preprocessing.ipynb
-=======
 # Ignore model training scripts if not needed
 Data_Preprocessing.ipynb
 
@@ -36,4 +26,3 @@ Data_Preprocessing.ipynb
 
 # Ignore markdown files
 *.md
->>>>>>> d85bb04f61c87ee9ae7d5372c1caa56a7b4504d7
