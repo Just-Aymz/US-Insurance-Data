@@ -78,8 +78,8 @@ Ensure you have the following installed:
 ### Cloning the Repository
 
 ```bash
-git clone <repository-url>
-cd <repository-folder>
+git clone https://github.com/Just-Aymz/US-Insurance-Data.git
+cd US-Insurance-Data
 ```
 
 ### Creating a Virtual Environment
