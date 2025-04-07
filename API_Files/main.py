@@ -1,8 +1,8 @@
 from fastapi import FastAPI, HTTPException, Request, Form
 from fastapi.templating import Jinja2Templates
+from fastapi.staticfiles import StaticFiles
 from fastapi.responses import HTMLResponse
 import pickle
-import numpy as np
 import pandas as pd
 from API_Files.Schema import InputFeatures
 
@@ -15,6 +15,9 @@ app = FastAPI()
 
 # Template config
 templates = Jinja2Templates(directory="templates")
+
+# Mount the static folder to serve CSS and other static files
+app.mount("/Static", StaticFiles(directory="Static"), name="background")
 
 # Route for Home Page
 @app.get("/", response_class=HTMLResponse)
