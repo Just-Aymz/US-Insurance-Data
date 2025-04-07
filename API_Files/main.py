@@ -1,4 +1,6 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request, Form
+from fastapi.templating import Jinja2Templates
+from fastapi.responses import HTMLResponse
 import pickle
 import numpy as np
 import pandas as pd
@@ -11,22 +13,50 @@ with open("best_model_and_preprocessor.pkl", "rb") as f:
 # Initialize FastAPI app
 app = FastAPI()
 
-@app.get("/")
-def home():
-    return {"message": "Welcome to the Machine Learning API"}
+# Template config
+templates = Jinja2Templates(directory="templates")
 
-@app.post("/predict")
-def predict(input_data: InputFeatures):
+# Route for Home Page
+@app.get("/", response_class=HTMLResponse)
+async def home(request: Request):
+    return templates.TemplateResponse("home.html", {"request": request})
+
+# Route for Prediction Form
+@app.get("/prediction", response_class=HTMLResponse)
+async def form_get(request: Request):
+    return templates.TemplateResponse("form.html", {"request": request, "prediction": None})
+
+@app.post("/prediction", response_class=HTMLResponse)
+async def form_post(
+    request: Request,
+    age: float = Form(...),
+    bmi: float = Form(...),
+    children: int = Form(...),
+    sex: str = Form(...),
+    smoker: str = Form(...),
+    region: str = Form(...)
+):
     try:
-        # Convert input_data into a dataframe (expected by the model)
-        input_df = pd.DataFrame([input_data.dict()])
+        # Create InputFeatures instance
+        features = InputFeatures(
+            age=age,
+            bmi=bmi,
+            children=children,
+            sex=sex,
+            smoker=smoker,
+            region=region
+        )
 
-        print(f"received_data: {input_data.model_dump()}")
+        # Convert to dict/DataFrame
+        input_df = pd.DataFrame([features.model_dump()])
 
-        # Make a prediction
-        prediction = model.predict(input_df)
+        # Make prediction
+        prediction = model.predict(input_df)[0]
 
-        return {"prediction": prediction[0]}
-    
+        return templates.TemplateResponse("form.html", {
+            "request": request,
+            "prediction": prediction
+        })
+
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
