@@ -4,7 +4,7 @@ from fastapi.responses import HTMLResponse
 import pickle
 import numpy as np
 import pandas as pd
-from Schema import InputFeatures
+from API_Files.Schema import InputFeatures
 
 # Load the saved model and preprocessor
 with open("best_model_and_preprocessor.pkl", "rb") as f:
