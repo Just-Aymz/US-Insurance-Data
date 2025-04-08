@@ -35,10 +35,10 @@
 
             <label for="region">Region:</label>
             <select id="region" name="region" required>
-                <option value="south_west">South West</option>
-                <option value="south_east">South East</option>
-                <option value="north_west">North West</option>
-                <option value="north_east">North East</option>
+                <option value="southwest">South West</option>
+                <option value="southeast">South East</option>
+                <option value="northwest">North West</option>
+                <option value="northeast">North East</option>
             </select>
 
             <button type="submit">Get Prediction</button>
@@ -46,7 +46,7 @@
 
         {% if prediction %}
             <div class="prediction">
-                <p>Prediction: {{ prediction }}</p>
+                <p>Prediction: {{ prediction | round(2) }}</p>
             </div>
         {% endif %}
         {% if prediction == 'Error' %}
