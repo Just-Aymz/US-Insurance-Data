@@ -152,13 +152,33 @@ docker run -p 8000:8000 ml-api
 ## File Structure
 
 ```
-├── Data_Preprocessing.ipynb  # Data preprocessing steps
-├── main.py                   # FastAPI implementation
-├── Schema.py                 # Input schema definitions
-├── best_model_and_preprocessor.pkl  # Trained model & transformer
-├── requirements.txt          # Required dependencies
-├── Dockerfile                # Docker setup for containerization
-└── README.md                 # Documentation
+├── API_Files
+│   ├── __pycache__/
+│   ├── .gitkeep
+│   ├── main.py
+│   └── Schema.py
+├── Dataset
+│   ├── .gitkeep
+│   └── insurance.csv
+├── DockerFiles
+│   ├── .dockerignore
+│   ├── .gitkeep
+│   └── Dockerfile
+├── Preprocessing
+│   ├── .gitkeep
+│   └── Data_Preprocessing.ipynb
+├── Static
+│   ├── .gitkeep
+│   ├── risk_management.jpg
+│   └── style.css
+├── Templates
+│   ├── .gitkeep
+│   ├── form.html
+│   └── home.html
+├── best_model_and_preprocessor.pkl
+├── LICENSE
+├── README.md
+└── requirements.txt
 ```
 
 ## Future Enhancements
